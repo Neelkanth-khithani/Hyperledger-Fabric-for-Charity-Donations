@@ -1,0 +1,37 @@
+Environment variables:
+
+For donororgadmin @  DonorOrg use these:
+
+export CORE_PEER_LOCALMSPID=DonorOrgMSP
+export CORE_PEER_MSPCONFIGPATH=/home/neel/HFN-Charity/_msp/DonorOrg/donororgadmin/msp
+export CORE_PEER_ADDRESS=donororgpeer-api.127-0-0-1.nip.io:8080
+
+For donororgcaadmin @  DonorOrg use these:
+
+export CORE_PEER_LOCALMSPID=DonorOrgMSP
+export CORE_PEER_MSPCONFIGPATH=/home/neel/HFN-Charity/_msp/DonorOrg/donororgcaadmin/msp
+export CORE_PEER_ADDRESS=donororgpeer-api.127-0-0-1.nip.io:8080
+
+For ngoorgadmin @  NGOOrg use these:
+
+export CORE_PEER_LOCALMSPID=NGOOrgMSP
+export CORE_PEER_MSPCONFIGPATH=/home/neel/HFN-Charity/_msp/NGOOrg/ngoorgadmin/msp
+export CORE_PEER_ADDRESS=ngoorgpeer-api.127-0-0-1.nip.io:8080
+
+For ngoorgcaadmin @  NGOOrg use these:
+
+export CORE_PEER_LOCALMSPID=NGOOrgMSP
+export CORE_PEER_MSPCONFIGPATH=/home/neel/HFN-Charity/_msp/NGOOrg/ngoorgcaadmin/msp
+export CORE_PEER_ADDRESS=ngoorgpeer-api.127-0-0-1.nip.io:8080
+
+For auditororgadmin @  AuditorOrg use these:
+
+export CORE_PEER_LOCALMSPID=AuditorOrgMSP
+export CORE_PEER_MSPCONFIGPATH=/home/neel/HFN-Charity/_msp/AuditorOrg/auditororgadmin/msp
+export CORE_PEER_ADDRESS=auditororgpeer-api.127-0-0-1.nip.io:8080
+
+For auditororgcaadmin @  AuditorOrg use these:
+
+export CORE_PEER_LOCALMSPID=AuditorOrgMSP
+export CORE_PEER_MSPCONFIGPATH=/home/neel/HFN-Charity/_msp/AuditorOrg/auditororgcaadmin/msp
+export CORE_PEER_ADDRESS=auditororgpeer-api.127-0-0-1.nip.io:8080

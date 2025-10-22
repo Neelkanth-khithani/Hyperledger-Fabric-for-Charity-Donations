@@ -1,0 +1,24 @@
+{
+  "port": 8080,
+  "endorsing_organizations": [
+    {
+      "name": "DonorOrg"
+    },
+    {
+      "name": "NGOOrg"
+    },
+    {
+      "name": "AuditorOrg"
+    }
+  ],
+  "channels": [
+    {
+      "name": "charity-channel",
+      "endorsing_organizations": [
+        "DonorOrg",
+        "NGOOrg",
+        "AuditorOrg"
+      ]
+    }
+  ]
+}
