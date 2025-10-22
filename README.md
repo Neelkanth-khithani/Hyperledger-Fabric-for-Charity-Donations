@@ -6,22 +6,9 @@ This case study documents the development and deployment of a **permissioned blo
 
 ![architecture-diagram](/images/architecture_diagram.png)
 
-## Technologies & Environment
-
-The following is a concise summary of the critical technologies, tools, and versions used to build and operate the Hyperledger Fabric network:
-
-| Category | Technology/Tool | Version | Primary Role |
-| :--- | :--- | :--- | :--- |
-| **Blockchain** | **Hyperledger Fabric** | v2.2.9 (Binaries) | The foundational permissioned blockchain framework for the multi-organizational network. |
-| **Smart Contract Logic** | **Go (Golang)** | v1.17.6 | The programming language used to develop the core business logic (Chaincode). |
-| **Development Runtime** | **IBM Microfab** | Latest (Containerized) | Tool used to rapidly bootstrap and manage the complete Fabric network (Peers, Orderer, CAs). |
-| **Containerization** | **Docker Engine** | Latest Installed | Used to host the Microfab environment and ensure configuration consistency. |
-| **Host Environment** | **Windows 11 (WSL 2)** | Ubuntu 20.04.6 LTS | Operating system used to execute all setup, deployment, and testing commands. |
-| **Client Interface** | **Hyperledger Fabric `peer` CLI** | v2.2.9 | Used for all chaincode lifecycle management (install, approve, commit) and transaction execution. |
-| **Utility Tooling** | **Weft (`@hyperledgendary/weftility`)** | Global NPM Install | Used to extract network cryptographic material (wallets, gateways, MSPs) from Microfab. |
-
 # Table of Contents
 
+- [Technologies](#technologies)
 - [Step 1: Installations](#step-1-installations)
   - [Docker](#docker)
   - [cURL](#curl)
@@ -420,10 +407,22 @@ peer chaincode invoke -o orderer-api.127-0-0-1.nip.io:8080 --channelID charity-c
 
 ![audit](/images/audit.png)
 
+# Technologies
+
+The following is a concise summary of the critical technologies, tools, and versions used to build and operate the Hyperledger Fabric network:
+
+| Category | Technology/Tool | Version | Primary Role |
+| :--- | :--- | :--- | :--- |
+| **Blockchain** | **Hyperledger Fabric** | v2.2.9 (Binaries) | The foundational permissioned blockchain framework for the multi-organizational network. |
+| **Smart Contract Logic** | **Go (Golang)** | v1.17.6 | The programming language used to develop the core business logic (Chaincode). |
+| **Development Runtime** | **IBM Microfab** | Latest (Containerized) | Tool used to rapidly bootstrap and manage the complete Fabric network (Peers, Orderer, CAs). |
+| **Containerization** | **Docker Engine** | Latest Installed | Used to host the Microfab environment and ensure configuration consistency. |
+| **Host Environment** | **Windows 11 (WSL 2)** | Ubuntu 20.04.6 LTS | Operating system used to execute all setup, deployment, and testing commands. |
+| **Client Interface** | **Hyperledger Fabric `peer` CLI** | v2.2.9 | Used for all chaincode lifecycle management (install, approve, commit) and transaction execution. |
+| **Utility Tooling** | **Weft (`@hyperledgendary/weftility`)** | Global NPM Install | Used to extract network cryptographic material (wallets, gateways, MSPs) from Microfab. |
+
 # Acknowledgements
 
 * The implementation approach was developed after seeing the **demo lecture conducted by Professor Mrs. Lifna** [https://github.com/LifnaJos/Hyperledger-Fabric-Network-Go-Lang](https://github.com/LifnaJos/Hyperledger-Fabric-Network-Go-Lang), as part of Blockchain course under the Computer Engineering Department, V.E.S. Institute of Technology, Mumbai. 
-
 * [https://github.com/hyperledger-labs/microfab](https://github.com/hyperledger-labs/microfab)
-
 * [https://hyperledger-fabric.readthedocs.io/en/release-2.5/](https://hyperledger-fabric.readthedocs.io/en/release-2.5/)
