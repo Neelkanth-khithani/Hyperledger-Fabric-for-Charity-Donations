@@ -1,14 +1,16 @@
 # Hyperledger Fabric for Charity Donations
 
-## Project Overview
-
-This case study documents the development and deployment of a **permissioned blockchain solution** aimed at enhancing **transparency and accountability** in charity donations. The system provides an **immutable, shared ledger** viewable by Donors, NGOs, and Auditors, ensuring an auditable record of funds from initial contribution to final allocation. The entire solution was built and validated within a local development environment.
+## Experimental Setup
+- The experimental environment was configured on a **Windows 11 system running Ubuntu 20.04.6 LTS through Windows Subsystem for Linux (WSL)**. The host machine was powered by an **Intel Core i5 processor (4 cores)** with **8 GB RAM**.
+- The local Hyperledger Fabric network was orchestrated using **IBM Microfab**, a containerized Fabric runtime designed for development environments. **Docker Engine v24.x** and **Docker Compose v1.29.2** were employed to manage containerized Fabric components.
 
 ![architecture-diagram](/images/architecture_diagram.png)
 
+- The client-side environment leveraged **Node.js v18.x** and **npm v8.x** for package management, while the **smart contracts (chaincode)** were implemented in **Go v1.17.6**. The blockchain framework utilized **Hyperledger Fabric v2.4** components, with **CouchDB** serving as the state database.
+- All experiments — including chaincode packaging, installation, approval, commit, and transaction invocation — were executed within this environment, ensuring full reproducibility.
+
 # Table of Contents
 
-- [Technologies](#technologies)
 - [Step 1: Installations](#step-1-installations)
   - [Docker](#docker)
   - [cURL](#curl)
@@ -282,6 +284,9 @@ peer: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.32' not found (required 
 ## Terminal 1 (DonorOrg)
 
 ### Invoke CreateDonation (add a new donation)
+- Used to invoke the `CreateDonation function` on the deployed chaincode charity within the charity-channel
+    - This example adds a donation record with:
+    - **Donation ID: D001; Donor Name: Alice; Organization: HelpingHands; Category: Education; Date: 2025-10-22; Amount: 500**
 
 ```
 peer chaincode invoke -o orderer-api.127-0-0-1.nip.io:8080 --channelID charity-channel --name charity --waitForEvent -c '{"function":"CreateDonation","Args":["D001","Alice","HelpingHands","Education","2025-10-22","500"]}'
@@ -290,7 +295,8 @@ peer chaincode invoke -o orderer-api.127-0-0-1.nip.io:8080 --channelID charity-c
 ![create-donation](/images/create-donation.png)
 
 ### Query donation by ID (GetDonation)
-
+- Used to query the `GetDonation function` from the deployed charity chaincode on the charity-channel
+    - This example queries the donation record with **ID D001**
 ```
 peer chaincode query --channelID charity-channel --name charity -c '{"function":"GetDonation","Args":["D001"]}'
 ```
@@ -298,6 +304,8 @@ peer chaincode query --channelID charity-channel --name charity -c '{"function":
 ![get-donation](/images/get-donation.png)
 
 ### Update donation status (UpdateStatus)
+- Used to invoke the UpdateStatus function on the deployed charity chaincode within the charity-channel
+    - This example updates the status of the donation with **ID D001 to “Processed”**
 ```
 peer chaincode invoke -o orderer-api.127-0-0-1.nip.io:8080 --channelID charity-channel --name charity --waitForEvent -c '{"function":"UpdateStatus","Args":["D001","Processed"]}'
 ```
@@ -312,6 +320,8 @@ peer chaincode query --channelID charity-channel --name charity -c '{"function":
 ![status-changed](/images/status-changed.png)
 
 ### Query all donations (GetAllDonations)
+- Used to query the `GetAllDonations function` from the deployed charity chaincode on the charity-channel.
+    - This command returns a list of **all donation records**
 
 ```
 peer chaincode query --channelID charity-channel --name charity -c '{"function":"GetAllDonations","Args":[]}'
@@ -348,7 +358,7 @@ peer chaincode query --channelID charity-channel --name charity -c '{"function":
 ```
 
 ### Query donation by ID
-
+- Fetches the details of a donation identified by **Donation ID D001**
 ```
 peer chaincode query --channelID charity-channel --name charity -c '{"function":"GetDonation","Args":["D001"]}'
 ```
@@ -356,7 +366,7 @@ peer chaincode query --channelID charity-channel --name charity -c '{"function":
 ![query-donation-by-id](/images/query-donation-by-id.png)
 
 ### Update donation status (NGO approves/marks as processed)
-
+- Updates the status of **Donation ID D001 to “ProcessedByNGO”**, reflecting that it has been verified or approved by the receiving organization
 ```
 peer chaincode invoke -o orderer-api.127-0-0-1.nip.io:8080 --channelID charity-channel --name charity --waitForEvent -c '{"function":"UpdateStatus","Args":["D001","ProcessedByNGO"]}'
 ```
@@ -364,6 +374,7 @@ peer chaincode invoke -o orderer-api.127-0-0-1.nip.io:8080 --channelID charity-c
 ![ngo-approve](/images/ngo-approve.png)
 
 ### Query all donations
+- Displays all stored donation entries with their respective details
 
 ```
 peer chaincode query --channelID charity-channel --name charity -c '{"function":"GetAllDonations","Args":[]}'
@@ -400,26 +411,12 @@ peer lifecycle chaincode approveformyorg -o orderer-api.127-0-0-1.nip.io:8080 \
 ```
 
 ## Finalizing the Donation Record by Auditor
-
+- Updates the status of **Donation ID D001 to “Audited”**, indicating that the donation record has been reviewed and validated for accuracy and compliance
 ```
 peer chaincode invoke -o orderer-api.127-0-0-1.nip.io:8080 --channelID charity-channel --name charity --waitForEvent -c '{"function":"UpdateStatus","Args":["D001","Audited"]}'
 ```
 
 ![audit](/images/audit.png)
-
-# Technologies
-
-The following is a concise summary of the critical technologies, tools, and versions used to build and operate the Hyperledger Fabric network:
-
-| Category | Technology/Tool | Version | Primary Role |
-| :--- | :--- | :--- | :--- |
-| **Blockchain** | **Hyperledger Fabric** | v2.2.9 (Binaries) | The foundational permissioned blockchain framework for the multi-organizational network. |
-| **Smart Contract Logic** | **Go (Golang)** | v1.17.6 | The programming language used to develop the core business logic (Chaincode). |
-| **Development Runtime** | **IBM Microfab** | Latest (Containerized) | Tool used to rapidly bootstrap and manage the complete Fabric network (Peers, Orderer, CAs). |
-| **Containerization** | **Docker Engine** | Latest Installed | Used to host the Microfab environment and ensure configuration consistency. |
-| **Host Environment** | **Windows 11 (WSL 2)** | Ubuntu 20.04.6 LTS | Operating system used to execute all setup, deployment, and testing commands. |
-| **Client Interface** | **Hyperledger Fabric `peer` CLI** | v2.2.9 | Used for all chaincode lifecycle management (install, approve, commit) and transaction execution. |
-| **Utility Tooling** | **Weft (`@hyperledgendary/weftility`)** | Global NPM Install | Used to extract network cryptographic material (wallets, gateways, MSPs) from Microfab. |
 
 # Acknowledgements
 
