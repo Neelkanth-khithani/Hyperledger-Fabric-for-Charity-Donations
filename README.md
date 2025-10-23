@@ -172,8 +172,10 @@ weft microfab -w ./_wallets -p ./_gateways -m ./_msp -f`
 
 ![env-variables](/images/env-variables.png)
 
-3. Fabric Tools Installation (This might not work)
+3. Fabric Tools Installation
     - `curl -sSL https://raw.githubusercontent.com/hyperledger/fabric/main/scripts/install-fabric.sh | bash -s -- binary`
+
+> **Warning:** This might later cause an error while deploying the chaincode [Jump to error & solution](#on-terminal-2-deploy-the-chaincode)
 
 ![HLF-binary](/images/HLF-binary.png)
 
@@ -410,7 +412,7 @@ peer lifecycle chaincode approveformyorg -o orderer-api.127-0-0-1.nip.io:8080 \
 --channelID charity-channel --name charity --version 1 --sequence 1 --waitForEvent --package-id ${CC_PACKAGE_ID}
 ```
 
-## Finalizing the Donation Record by Auditor
+### Finalizing the Donation Record by Auditor
 - Updates the status of **Donation ID D001 to “Audited”**, indicating that the donation record has been reviewed and validated for accuracy and compliance
 ```
 peer chaincode invoke -o orderer-api.127-0-0-1.nip.io:8080 --channelID charity-channel --name charity --waitForEvent -c '{"function":"UpdateStatus","Args":["D001","Audited"]}'
