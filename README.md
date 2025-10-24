@@ -4,7 +4,7 @@
 - The experimental environment was configured on a **Windows 11 system running Ubuntu 20.04.6 LTS through Windows Subsystem for Linux (WSL)**. The host machine was powered by an **Intel Core i5 processor (4 cores)** with **8 GB RAM**.
 - The local Hyperledger Fabric network was orchestrated using **IBM Microfab**, a containerized Fabric runtime designed for development environments. **Docker Engine v24.x** and **Docker Compose v1.29.2** were employed to manage containerized Fabric components.
 
-![architecture-diagram](/images/architecture_diagram.png)
+![architecture-diagram](/images/HFN-Architecture.png)
 
 - The client-side environment leveraged **Node.js v18.x** and **npm v8.x** for package management, while the **smart contracts (chaincode)** were implemented in **Go v1.17.6**. The blockchain framework utilized **Hyperledger Fabric v2.4** components, with **CouchDB** serving as the state database.
 - All experiments — including chaincode packaging, installation, approval, commit, and transaction invocation — were executed within this environment, ensuring full reproducibility.
@@ -425,3 +425,4 @@ peer chaincode invoke -o orderer-api.127-0-0-1.nip.io:8080 --channelID charity-c
 * The implementation approach was developed after seeing the **demo lecture conducted by Professor Mrs. Lifna** [https://github.com/LifnaJos/Hyperledger-Fabric-Network-Go-Lang](https://github.com/LifnaJos/Hyperledger-Fabric-Network-Go-Lang), as part of Blockchain course under the Computer Engineering Department, V.E.S. Institute of Technology, Mumbai. 
 * [https://github.com/hyperledger-labs/microfab](https://github.com/hyperledger-labs/microfab)
 * [https://hyperledger-fabric.readthedocs.io/en/release-2.5/](https://hyperledger-fabric.readthedocs.io/en/release-2.5/)
+* Diagram Structure Reference: [Supply Chain using Hyperledger Fabric and React](https://github.com/kuldeep23907/Supply-Chain-using-Hyperledger-Fabric-and-React)
